@@ -47,12 +47,15 @@ The **OS Process Analyzer** is a web-based application designed to monitor and a
    git clone https://github.com/Anamikaghosh18/OperatingSystem-Process-Analyzer
    
 2. Install dependencies:
+    ```bash
     npm install
 
 3. Start the development server:
+    ```bash
     npm run dev
-    
+
 4. Open the application in your browser:
+    ```bash
     http://localhost:5173
 
 ## Contributing
