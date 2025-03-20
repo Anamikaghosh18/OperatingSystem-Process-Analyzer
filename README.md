@@ -31,17 +31,12 @@ The **OS Process Analyzer** is a web-based application designed to monitor and a
 
 ## Technologies Used
 
-### Frontend
-- ![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)
-- ![Chart.js](https://img.shields.io/badge/Chart.js-FF6384?style=for-the-badge&logo=chartdotjs&logoColor=white)
-- ![React Circular Progressbar](https://img.shields.io/badge/React%20Circular%20Progressbar-61DAFB?style=for-the-badge&logo=react&logoColor=white)
-- ![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)
-
-### Backend
-- ![Node.js](https://img.shields.io/badge/Node.js-43853D?style=for-the-badge&logo=node.js&logoColor=white)
-- ![Express.js](https://img.shields.io/badge/Express.js-404D59?style=for-the-badge)
-- ![Socket.IO](https://img.shields.io/badge/Socket.IO-010101?style=for-the-badge&logo=socket.io&logoColor=white)
-- ![Systeminformation](https://img.shields.io/badge/Systeminformation-FF5733?style=for-the-badge&logo=javascript&logoColor=white)
+| **Frontend**                                                                                     | **Backend**                                                                                     |
+|--------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------|
+| ![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB) | ![Node.js](https://img.shields.io/badge/Node.js-43853D?style=for-the-badge&logo=node.js&logoColor=white) |
+| ![Chart.js](https://img.shields.io/badge/Chart.js-FF6384?style=for-the-badge&logo=chartdotjs&logoColor=white) | ![Express.js](https://img.shields.io/badge/Express.js-404D59?style=for-the-badge)              |
+| ![React Circular Progressbar](https://img.shields.io/badge/React%20Circular%20Progressbar-61DAFB?style=for-the-badge&logo=react&logoColor=white) | ![Socket.IO](https://img.shields.io/badge/Socket.IO-010101?style=for-the-badge&logo=socket.io&logoColor=white) |
+| ![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white) | ![Systeminformation](https://img.shields.io/badge/Systeminformation-FF5733?style=for-the-badge&logo=javascript&logoColor=white) |
 
 ---
 
@@ -71,4 +66,10 @@ Contributions are welcome! If you'd like to contribute, please fork the reposito
 ---
 
 ## License
-This project is licensed under the MIT License. See the LICENSE file for details.
+This project is licensed under the [MIT License](./LICENSE). See the LICENSE file for details.
+
+## Contact 
+Feel free to reach out for feedback & collaboration.
+
+- **Email**: [g.anamika0101@gmail.com](mailto:g.anamika0101@gmail.com)
+- **LinkedIn**: [anamikaghosh18](https://www.linkedin.com/in/anamikaghosh18/)

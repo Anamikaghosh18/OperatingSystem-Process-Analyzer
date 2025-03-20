@@ -3,7 +3,7 @@ import { Line } from 'react-chartjs-2';
 import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
 import { io } from 'socket.io-client';
-import { Cpu, MemoryStick, HardDrive, Wifi, Activity, Monitor, Clock } from 'lucide-react';
+import { Cpu, MemoryStick, HardDrive, Wifi } from 'lucide-react';
 import ProcessChatbot from '../components/ProcessChatbot';
 import {
   Chart as ChartJS,
@@ -92,11 +92,6 @@ const Dashboard = () => {
     return (used / total) * 100;
   };
 
-  const formatUptime = (seconds: number) => {
-    const hours = Math.floor(seconds / 3600);
-    const minutes = Math.floor((seconds % 3600) / 60);
-    return `${hours}h ${minutes}m`;
-  };
 
   return (
     <div className="relative min-h-screen bg-gray-900 text-gray-300">
