@@ -1,21 +1,8 @@
 # OS Process Analyzer
 
-![Build Status](https://img.shields.io/badge/build-passing-brightgreen)
-![License](https://img.shields.io/badge/license-MIT-blue)
-![Contributors](https://img.shields.io/badge/contributors-1-orange)
-
 The **OS Process Analyzer** is a web-based application designed to monitor and analyze system metrics in real-time. It provides insights into CPU usage, memory consumption, disk I/O, and network activity, along with AI-driven reports to help identify performance bottlenecks and anomalies.
 
 ---
-
-## Table of Contents
-- [Features](#features)
-- [Technologies Used](#technologies-used)
-- [Installation](#installation)
-- [Usage](#usage)
-- [Contributing](#contributing)
-- [License](#license)
-- [Contact Details](#contact-details)
 
 ## Features
 
@@ -34,6 +21,11 @@ The **OS Process Analyzer** is a web-based application designed to monitor and a
 - **Customizable Dashboard**:
   - Responsive design with animated charts and gauges.
   - Fixed chatbot for process-related queries.
+
+---
+
+## Demo
+
 
 ---
 
@@ -79,12 +71,4 @@ Contributions are welcome! If you'd like to contribute, please fork the reposito
 ---
 
 ## License
-This project is licensed under the MIT License. See the [LICENSE](https://github.com/Anamikaghosh18/OperatingSystem-Process-Analyzer/blob/main/LICENSE) file for details.
-
----
-
-## Contact Details
-
-- **Email**: [g.anamika0101@gmail.com](mailto:g.anamika0101@gmail.com)
-- **LinkedIn**: [anamikaghosh18](https://www.linkedin.com/in/anamikaghosh18/)
-
+This project is licensed under the MIT License. See the LICENSE file for details.
