@@ -29,8 +29,23 @@ const ProcessList = () => {
     process.name.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
+  // Function to determine progress bar color based on usage
+  const getProgressBarColor = (usage: number) => {
+    if (usage > 80) return 'bg-red-500'; // High usage
+    if (usage > 50) return 'bg-yellow-500'; // Moderate usage
+    return 'bg-green-500'; // Low usage
+  };
+
   return (
     <div className="bg-gray-900 rounded-lg shadow-lg animate-fade-in">
+      {/* Text Section Below Navbar */}
+      <div className="text-center py-6">
+        <h1 className="text-3xl font-bold text-gray-300">Process List</h1>
+        <p className="text-lg text-gray-400 mt-2">
+          Monitor and analyze the processes running on your system in real-time. Use the search bar to filter processes by name.
+        </p>
+      </div>
+
       {/* Search Bar */}
       <div className="p-4 border-b border-gray-700">
         <input
@@ -81,7 +96,7 @@ const ProcessList = () => {
                     <span>{process.cpu.toFixed(1)}%</span>
                     <div className="w-full bg-gray-700 rounded-full h-2">
                       <div
-                        className="bg-blue-500 h-2 rounded-full"
+                        className={`${getProgressBarColor(process.cpu)} h-2 rounded-full`}
                         style={{ width: `${process.cpu}%` }}
                       ></div>
                     </div>
@@ -92,7 +107,7 @@ const ProcessList = () => {
                     <span>{process.mem.toFixed(1)}%</span>
                     <div className="w-full bg-gray-700 rounded-full h-2">
                       <div
-                        className="bg-green-500 h-2 rounded-full"
+                        className={`${getProgressBarColor(process.mem)} h-2 rounded-full`}
                         style={{ width: `${process.mem}%` }}
                       ></div>
                     </div>

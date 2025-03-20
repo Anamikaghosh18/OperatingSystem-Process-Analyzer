@@ -19,7 +19,8 @@ setInterval(async () => {
   const network = await si.networkStats();
   const disk = await si.fsSize();
   const processes = await si.processes();
-  
+  const uptime = process.uptime(); 
+
   io.emit('systemStats', {
     cpu: cpu.currentLoad,
     memory: {
@@ -29,7 +30,8 @@ setInterval(async () => {
     },
     network: network[0],
     disk: disk[0],
-    processes: processes
+    processes: processes,
+    uptime: uptime // Include uptime in the emitted data
   });
 }, 1000);
 

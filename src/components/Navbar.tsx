@@ -1,4 +1,3 @@
-import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { LayoutDashboard, List, Brain } from 'lucide-react';
 
@@ -14,7 +13,8 @@ const Navbar = () => {
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16">
           <div className="flex items-center space-x-8">
-            <h1 className="text-xl font-bold text-blue-accent-500">OS Analyzer</h1>
+            {/* Updated Name and Font */}
+            <h1 className="text-2xl font-extrabold text-blue-accent-500 font-serif">SysTrack</h1>
             <div className="flex space-x-4">
               <Link
                 to="/"
