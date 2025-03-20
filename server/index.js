@@ -21,6 +21,8 @@ setInterval(async () => {
   const processes = await si.processes();
   const uptime = process.uptime(); 
 
+  console.log('Emitted processes:', processes.list); // Log the processes data
+
   io.emit('systemStats', {
     cpu: cpu.currentLoad,
     memory: {
@@ -30,7 +32,7 @@ setInterval(async () => {
     },
     network: network[0],
     disk: disk[0],
-    processes: processes,
+    processes: processes.list || [], // Ensure `list` is an array
     uptime: uptime // Include uptime in the emitted data
   });
 }, 1000);

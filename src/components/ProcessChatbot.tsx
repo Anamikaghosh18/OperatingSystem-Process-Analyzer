@@ -109,7 +109,9 @@ Just ask me what you'd like to know!`;
 
       {/* Chatbot */}
       {isOpen && (
-        <div className="fixed bottom-16 right-4 w-[380px] h-[500px] bg-gray-900 rounded-lg shadow-lg overflow-hidden">
+        <div
+          className="fixed bottom-16 right-4 w-[380px] h-[500px] bg-gray-900 rounded-lg shadow-lg flex flex-col overflow-hidden"
+        >
           {/* Header */}
           <div className="bg-gray-800 p-4 border-b border-gray-700">
             <h2 className="text-xl font-semibold text-blue-400 flex items-center gap-2">

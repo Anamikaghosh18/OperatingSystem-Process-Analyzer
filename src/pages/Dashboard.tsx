@@ -166,7 +166,7 @@ const Dashboard = () => {
       </div>
 
       {/* Graphs Section */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 px-6 mt-8">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 px-6 mt-12">
         {/* CPU Usage Chart */}
         <div className="bg-gray-800 p-6 rounded-lg shadow-lg">
           <h3 className="text-lg font-semibold mb-4 text-blue-400">CPU Usage Over Time</h3>

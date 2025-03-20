@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { io } from 'socket.io-client';
 import { Cpu, MemoryStick } from 'lucide-react'; // Icons for CPU and Memory
 
@@ -17,7 +17,12 @@ const ProcessList = () => {
     const socket = io('http://localhost:3000');
 
     socket.on('systemStats', (data) => {
-      setProcesses(data.processes.list);
+      if (data && data.processes && Array.isArray(data.processes.list)) {
+        setProcesses(data.processes.list);
+      } else {
+        console.error('Invalid processes data received:', data);
+        setProcesses([]); // Fallback to an empty array
+      }
     });
 
     return () => {
