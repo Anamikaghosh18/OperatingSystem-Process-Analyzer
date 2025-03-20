@@ -12,23 +12,38 @@ interface Process {
 const ProcessList = () => {
   const [processes, setProcesses] = useState<Process[]>([]);
   const [searchTerm, setSearchTerm] = useState('');
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const socket = io('http://localhost:3000');
 
     socket.on('systemStats', (data) => {
-      if (data && data.processes && Array.isArray(data.processes.list)) {
-        setProcesses(data.processes.list);
+      if (data && data.processes && Array.isArray(data.processes)) {
+        setProcesses(data.processes); // Use data.processes directly
+        setLoading(false); // Data received, stop loading
       } else {
         console.error('Invalid processes data received:', data);
         setProcesses([]); // Fallback to an empty array
+        setLoading(false); // Stop loading even if data is invalid
       }
+    });
+
+    socket.on('disconnect', () => {
+      console.warn('WebSocket disconnected');
     });
 
     return () => {
       socket.disconnect();
     };
   }, []);
+
+  if (loading) {
+    return (
+      <div className="text-center text-gray-300">
+        <p>Loading processes...</p>
+      </div>
+    );
+  }
 
   const filteredProcesses = processes.filter((process) =>
     process.name.toLowerCase().includes(searchTerm.toLowerCase())

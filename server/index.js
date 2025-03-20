@@ -14,27 +14,29 @@ const io = new Server(httpServer, {
 
 // Emit system stats every second
 setInterval(async () => {
-  const cpu = await si.currentLoad();
-  const mem = await si.mem();
-  const network = await si.networkStats();
-  const disk = await si.fsSize();
-  const processes = await si.processes();
-  const uptime = process.uptime(); 
+  try {
+    const cpu = await si.currentLoad();
+    const mem = await si.mem();
+    const network = await si.networkStats();
+    const disk = await si.fsSize();
+    const processes = await si.processes();
+    const uptime = process.uptime();
 
-  console.log('Emitted processes:', processes.list); // Log the processes data
-
-  io.emit('systemStats', {
-    cpu: cpu.currentLoad,
-    memory: {
-      total: mem.total,
-      used: mem.used,
-      free: mem.free
-    },
-    network: network[0],
-    disk: disk[0],
-    processes: processes.list || [], // Ensure `list` is an array
-    uptime: uptime // Include uptime in the emitted data
-  });
+    io.emit('systemStats', {
+      cpu: cpu.currentLoad,
+      memory: {
+        total: mem.total,
+        used: mem.used,
+        free: mem.free,
+      },
+      network: network[0],
+      disk: disk[0],
+      processes: processes.list || [], // Ensure `list` is an array
+      uptime: uptime,
+    });
+  } catch (error) {
+    console.error('Error fetching system stats:', error);
+  }
 }, 1000);
 
 io.on('connection', (socket) => {

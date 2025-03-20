@@ -1,8 +1,17 @@
 import { Activity, AlertTriangle, CheckCircle, Filter } from 'lucide-react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 const AIReports = () => {
   const [filter, setFilter] = useState<string>('all');
+  const [currentTime, setCurrentTime] = useState<string>(new Date().toLocaleString());
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentTime(new Date().toLocaleString());
+    }, 1000); // Update time every second
+
+    return () => clearInterval(interval); // Cleanup on unmount
+  }, []);
 
   const reports = [
     {
@@ -13,7 +22,6 @@ const AIReports = () => {
         'Continue monitoring CPU usage during peak hours',
         'Consider scheduling routine maintenance',
       ],
-      timestamp: '2025-03-20 10:00 AM',
     },
     {
       title: 'Resource Usage Patterns',
@@ -23,7 +31,6 @@ const AIReports = () => {
         'Investigate processes with high memory consumption',
         'Consider increasing RAM if trend continues',
       ],
-      timestamp: '2025-03-20 09:45 AM',
     },
     {
       title: 'Performance Bottlenecks',
@@ -34,7 +41,6 @@ const AIReports = () => {
         'Consider upgrading to SSD storage',
         'Review and optimize database queries',
       ],
-      timestamp: '2025-03-20 09:30 AM',
     },
     {
       title: 'Network Activity Anomalies',
@@ -45,7 +51,6 @@ const AIReports = () => {
         'Monitor network traffic patterns',
         'Consider implementing rate limiting',
       ],
-      timestamp: '2025-03-20 09:15 AM',
     },
   ];
 
@@ -96,6 +101,8 @@ const AIReports = () => {
         </div>
       </div>
 
+      <div className="text-right text-slate-400 text-sm">Real-time: {currentTime}</div>
+
       <div className="grid grid-cols-1 gap-6">
         {filteredReports.map((report, index) => (
           <div
@@ -108,7 +115,7 @@ const AIReports = () => {
                 {getStatusIcon(report.status)}
                 <h3 className="text-xl font-semibold text-blue-accent-500">{report.title}</h3>
               </div>
-              <span className="text-slate-400 text-sm">{report.timestamp}</span>
+              <span className="text-slate-400 text-sm">{currentTime}</span>
             </div>
 
             <p className="text-slate-300 mb-4">{report.description}</p>
