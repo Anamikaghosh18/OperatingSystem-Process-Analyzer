@@ -88,12 +88,22 @@ const Dashboard = () => {
 
   return (
     <div className="relative min-h-screen">
+      {/* Animated Text Section */}
+      <div className="text-center py-6 animate-fade-in">
+        <h1 className="text-3xl font-bold text-gray-300 animate-slide-in">
+          Welcome to the OS Process Analyzer
+        </h1>
+        <p className="text-lg text-gray-400 mt-2 animate-fade-in">
+          Monitor your system's performance in real-time with AI-driven insights.
+        </p>
+      </div>
+
       <div className="space-y-6 animate-fade-in pr-[400px]">
         {/* Gauges Section */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-          {/* CPU Usage Gauge */}
-          <div className="card-gradient p-6 rounded-lg shadow-lg hover-card">
-            <h3 className="text-lg font-semibold mb-4 text-blue-accent-500">CPU Usage</h3>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          {/* CPU Usage Card */}
+          <div className="relative p-6 rounded-lg shadow-lg bg-gray-800 hover:scale-105 hover:shadow-xl transition-transform duration-300">
+            <h3 className="text-lg font-semibold mb-4 text-gray-300">CPU Usage</h3>
             <CircularProgressbar
               value={systemStats.cpu}
               text={`${systemStats.cpu.toFixed(1)}%`}
@@ -105,9 +115,9 @@ const Dashboard = () => {
             />
           </div>
 
-          {/* Memory Usage Gauge */}
-          <div className="card-gradient p-6 rounded-lg shadow-lg hover-card">
-            <h3 className="text-lg font-semibold mb-4 text-blue-accent-500">Memory Usage</h3>
+          {/* Memory Usage Card */}
+          <div className="relative p-6 rounded-lg shadow-lg bg-gray-800 hover:scale-105 hover:shadow-xl transition-transform duration-300">
+            <h3 className="text-lg font-semibold mb-4 text-gray-300">Memory Usage</h3>
             <CircularProgressbar
               value={getPercentage(systemStats.memory.used, systemStats.memory.total)}
               text={`${getPercentage(systemStats.memory.used, systemStats.memory.total).toFixed(1)}%`}
@@ -119,18 +129,18 @@ const Dashboard = () => {
             />
           </div>
 
-          {/* Network Usage */}
-          <div className="card-gradient p-6 rounded-lg shadow-lg hover-card">
-            <h3 className="text-lg font-semibold mb-4 text-blue-accent-500">Network</h3>
-            <div className="text-white">
+          {/* Network Usage Card */}
+          <div className="relative p-6 rounded-lg shadow-lg bg-gray-800 hover:scale-105 hover:shadow-xl transition-transform duration-300">
+            <h3 className="text-lg font-semibold mb-4 text-gray-300">Network Usage</h3>
+            <div className="text-gray-300">
               <p>↓ {((systemStats.network.rx_sec || 0) / 1024 / 1024).toFixed(2)} MB/s</p>
               <p>↑ {((systemStats.network.tx_sec || 0) / 1024 / 1024).toFixed(2)} MB/s</p>
             </div>
           </div>
 
-          {/* Disk Usage Gauge */}
-          <div className="card-gradient p-6 rounded-lg shadow-lg hover-card">
-            <h3 className="text-lg font-semibold mb-4 text-blue-accent-500">Disk Usage</h3>
+          {/* Disk Usage Card */}
+          <div className="relative p-6 rounded-lg shadow-lg bg-gray-800 hover:scale-105 hover:shadow-xl transition-transform duration-300">
+            <h3 className="text-lg font-semibold mb-4 text-gray-300">Disk Usage</h3>
             <CircularProgressbar
               value={getPercentage(systemStats.disk.used, systemStats.disk.size)}
               text={`${getPercentage(systemStats.disk.used, systemStats.disk.size).toFixed(1)}%`}

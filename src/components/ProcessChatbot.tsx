@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Send, Bot, User } from 'lucide-react';
+import { Send, Bot, User, MessageSquare } from 'lucide-react';
 
 interface Message {
   type: 'user' | 'bot';
@@ -8,7 +8,7 @@ interface Message {
 }
 
 interface ProcessData {
-  processes: any[];
+  processes: { name: string; cpu: number; memory: number }[];
   cpu: number;
   memory: {
     total: number;
@@ -22,10 +22,11 @@ const ProcessChatbot: React.FC<{ systemData: ProcessData }> = ({ systemData }) =
     {
       type: 'bot',
       content: 'Hello! I can help you analyze system processes and performance. What would you like to know?',
-      timestamp: new Date()
-    }
+      timestamp: new Date(),
+    },
   ]);
   const [input, setInput] = useState('');
+  const [isOpen, setIsOpen] = useState(false); // Toggle state for chatbot
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
   const scrollToBottom = () => {
@@ -38,26 +39,30 @@ const ProcessChatbot: React.FC<{ systemData: ProcessData }> = ({ systemData }) =
 
   const analyzeProcesses = (query: string): string => {
     const query_lower = query.toLowerCase();
-    
+
     if (query_lower.includes('cpu')) {
       return `Current CPU usage is ${systemData.cpu.toFixed(1)}%. ${
-        systemData.cpu > 80 ? 'The system is under heavy load!' : 
-        systemData.cpu > 50 ? 'The system is under moderate load.' :
-        'The system is running smoothly.'
+        systemData.cpu > 80
+          ? 'The system is under heavy load!'
+          : systemData.cpu > 50
+          ? 'The system is under moderate load.'
+          : 'The system is running smoothly.'
       }`;
     }
-    
+
     if (query_lower.includes('memory') || query_lower.includes('ram')) {
-      const usedPercentage = (systemData.memory.used / systemData.memory.total * 100).toFixed(1);
+      const usedPercentage = ((systemData.memory.used / systemData.memory.total) * 100).toFixed(1);
       const freeGB = (systemData.memory.free / 1024 / 1024 / 1024).toFixed(2);
       return `Memory usage is at ${usedPercentage}%. You have ${freeGB}GB of free memory available.`;
     }
-    
+
     if (query_lower.includes('process') && query_lower.includes('most')) {
-      const sortedProcesses = [...systemData.processes].sort((a, b) => b.cpu - a.cpu).slice(0, 3);
-      return `Top 3 CPU-intensive processes:\n${
-        sortedProcesses.map(p => `- ${p.name}: ${p.cpu.toFixed(1)}% CPU`).join('\n')
-      }`;
+      const sortedProcesses = [...systemData.processes]
+        .sort((a, b) => b.cpu - a.cpu)
+        .slice(0, 3);
+      return `Top 3 CPU-intensive processes:\n${sortedProcesses
+        .map((p) => `- ${p.name}: ${p.cpu.toFixed(1)}% CPU`)
+        .join('\n')}`;
     }
 
     if (query_lower.includes('help') || query_lower.includes('what')) {
@@ -79,85 +84,108 @@ Just ask me what you'd like to know!`;
     const userMessage: Message = {
       type: 'user',
       content: input,
-      timestamp: new Date()
+      timestamp: new Date(),
     };
 
     const botMessage: Message = {
       type: 'bot',
       content: analyzeProcesses(input),
-      timestamp: new Date()
+      timestamp: new Date(),
     };
 
-    setMessages(prev => [...prev, userMessage, botMessage]);
+    setMessages((prev) => [...prev, userMessage, botMessage]);
     setInput('');
   };
 
   return (
-    <div className="flex flex-col h-[500px] bg-navy-800 rounded-lg shadow-lg overflow-hidden">
-      <div className="bg-navy-900 p-4 border-b border-navy-700">
-        <h2 className="text-xl font-semibold text-blue-accent-500 flex items-center gap-2">
-          <Bot size={24} />
-          Process Analysis Assistant
-        </h2>
-      </div>
+    <>
+      {/* Toggle Button */}
+      <button
+        onClick={() => setIsOpen(!isOpen)}
+        className="fixed bottom-4 right-4 bg-blue-500 text-white p-3 rounded-full shadow-lg hover:bg-blue-400 transition-colors duration-200"
+      >
+        <MessageSquare size={24} />
+      </button>
 
-      <div className="flex-1 overflow-y-auto p-4 space-y-4">
-        {messages.map((message, index) => (
-          <div
-            key={index}
-            className={`flex ${message.type === 'user' ? 'justify-end' : 'justify-start'} animate-slide-in`}
-            style={{ animationDelay: `${index * 100}ms` }}
-          >
-            <div
-              className={`flex items-start space-x-2 max-w-[80%] ${
-                message.type === 'user' ? 'flex-row-reverse space-x-reverse' : 'flex-row'
-              }`}
-            >
-              <div className={`p-2 rounded-full ${
-                message.type === 'user' ? 'bg-blue-accent-500' : 'bg-navy-700'
-              }`}>
-                {message.type === 'user' ? (
-                  <User size={16} className="text-navy-900" />
-                ) : (
-                  <Bot size={16} className="text-blue-accent-500" />
-                )}
-              </div>
-              <div
-                className={`p-3 rounded-lg ${
-                  message.type === 'user'
-                    ? 'bg-blue-accent-500 text-navy-900'
-                    : 'bg-navy-700 text-slate-300'
-                }`}
-              >
-                <p className="whitespace-pre-line">{message.content}</p>
-                <p className="text-xs opacity-70 mt-1">
-                  {message.timestamp.toLocaleTimeString()}
-                </p>
-              </div>
-            </div>
+      {/* Chatbot */}
+      {isOpen && (
+        <div className="fixed bottom-16 right-4 w-[380px] h-[500px] bg-gray-900 rounded-lg shadow-lg overflow-hidden">
+          {/* Header */}
+          <div className="bg-gray-800 p-4 border-b border-gray-700">
+            <h2 className="text-xl font-semibold text-blue-400 flex items-center gap-2">
+              <Bot size={24} />
+              Process Analysis Assistant
+            </h2>
           </div>
-        ))}
-        <div ref={messagesEndRef} />
-      </div>
 
-      <form onSubmit={handleSubmit} className="p-4 border-t border-navy-700 bg-navy-900">
-        <div className="flex space-x-2">
-          <input
-            type="text"
-            value={input}
-            onChange={(e) => setInput(e.target.value)}
-            placeholder="Ask about system processes..."
-            className="flex-1 bg-navy-800 text-slate-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-accent-500 border border-navy-700"
-          />
-          <button
-            type="submit"
-            className="bg-blue-accent-500 text-navy-900 p-2 rounded-lg hover:bg-blue-accent-400 transition-colors duration-200"
-          >
-            <Send size={20} />
-          </button>
+          {/* Messages Section */}
+          <div className="flex-1 overflow-y-auto p-4 space-y-4">
+            {messages.map((message, index) => (
+              <div
+                key={index}
+                className={`flex ${
+                  message.type === 'user' ? 'justify-end' : 'justify-start'
+                } animate-slide-in`}
+                style={{ animationDelay: `${index * 100}ms` }}
+              >
+                <div
+                  className={`flex items-start space-x-2 max-w-[80%] ${
+                    message.type === 'user' ? 'flex-row-reverse space-x-reverse' : 'flex-row'
+                  }`}
+                >
+                  {/* Avatar */}
+                  <div
+                    className={`p-2 rounded-full ${
+                      message.type === 'user' ? 'bg-blue-500' : 'bg-gray-700'
+                    }`}
+                  >
+                    {message.type === 'user' ? (
+                      <User size={16} className="text-gray-900" />
+                    ) : (
+                      <Bot size={16} className="text-blue-400" />
+                    )}
+                  </div>
+
+                  {/* Message Bubble */}
+                  <div
+                    className={`p-3 rounded-lg ${
+                      message.type === 'user'
+                        ? 'bg-blue-500 text-gray-900'
+                        : 'bg-gray-800 text-gray-300'
+                    }`}
+                  >
+                    <p className="whitespace-pre-line">{message.content}</p>
+                    <p className="text-xs opacity-70 mt-1">
+                      {message.timestamp.toLocaleTimeString()}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            ))}
+            <div ref={messagesEndRef} />
+          </div>
+
+          {/* Input Section */}
+          <form onSubmit={handleSubmit} className="p-4 border-t border-gray-700 bg-gray-800">
+            <div className="flex space-x-2">
+              <input
+                type="text"
+                value={input}
+                onChange={(e) => setInput(e.target.value)}
+                placeholder="Ask about system processes..."
+                className="flex-1 bg-gray-700 text-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400 border border-gray-600"
+              />
+              <button
+                type="submit"
+                className="bg-blue-500 text-gray-900 p-2 rounded-lg hover:bg-blue-400 transition-colors duration-200"
+              >
+                <Send size={20} />
+              </button>
+            </div>
+          </form>
         </div>
-      </form>
-    </div>
+      )}
+    </>
   );
 };
 
