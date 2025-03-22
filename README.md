@@ -3,7 +3,13 @@
 The **OS Process Analyzer** is a web-based application designed to monitor and analyze system metrics in real-time. It provides insights into CPU usage, memory consumption, disk I/O, and network activity, along with AI-driven reports to help identify performance bottlenecks and anomalies.
 
 ---
+## Demo
 
+
+https://github.com/user-attachments/assets/633f9a20-82c4-474f-b0d0-ef98d9721f95
+
+
+---
 ## Features
 
 - **Real-Time Monitoring**:
@@ -24,7 +30,7 @@ The **OS Process Analyzer** is a web-based application designed to monitor and a
 
 ---
 
-## Demo
+
 
 
 ---
