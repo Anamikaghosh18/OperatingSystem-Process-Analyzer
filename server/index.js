@@ -2,6 +2,7 @@ import express from 'express';
 import { createServer } from 'http';
 import { Server } from 'socket.io';
 import si from 'systeminformation';
+import { exec } from 'child_process';
 
 const app = express();
 const httpServer = createServer(app);
@@ -10,6 +11,27 @@ const io = new Server(httpServer, {
     origin: "http://localhost:5173",
     methods: ["GET", "POST"]
   }
+});
+
+app.use(express.json());
+
+app.post('/kill-process', (req, res) => {
+  const { pid } = req.body;
+
+  if (!pid) {
+    return res.status(400).send({ error: 'PID is required' });
+  }
+
+  // Kill the process using the `taskkill` command (Windows)
+  exec(`taskkill /PID ${pid} /F`, (error, stdout, stderr) => {
+    if (error) {
+      console.error(`Error killing process ${pid}:`, stderr);
+      return res.status(500).send({ error: `Failed to kill process ${pid}` });
+    }
+
+    console.log(`Process ${pid} killed successfully.`);
+    res.status(200).send({ message: `Process ${pid} killed successfully.` });
+  });
 });
 
 // Emit system stats every second

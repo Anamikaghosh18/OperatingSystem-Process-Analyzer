@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { io } from 'socket.io-client';
-import { Cpu, MemoryStick } from 'lucide-react'; // Icons for CPU and Memory
+import { Cpu, MemoryStick, Trash2 } from 'lucide-react'; // Icons for CPU, Memory, and Kill Button
+import axios from 'axios'; // For making API requests
 
 interface Process {
   pid: number;
@@ -36,6 +37,19 @@ const ProcessList = () => {
       socket.disconnect();
     };
   }, []);
+
+  const killProcess = async (pid: number) => {
+    try {
+      const response = await axios.post('http://localhost:3000/kill-process', { pid });
+      if (response.status === 200) {
+        alert(`Process with PID ${pid} has been terminated.`);
+        setProcesses((prev) => prev.filter((process) => process.pid !== pid)); // Remove the killed process from the list
+      }
+    } catch (error) {
+      console.error('Failed to kill process:', error);
+      alert(`Failed to terminate process with PID ${pid}.`);
+    }
+  };
 
   if (loading) {
     return (
@@ -94,6 +108,9 @@ const ProcessList = () => {
               <th className="px-6 py-3 text-left text-xs font-medium text-blue-400 uppercase tracking-wider">
                 <MemoryStick className="inline-block w-4 h-4 mr-1" /> Memory %
               </th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-blue-400 uppercase tracking-wider">
+                Actions
+              </th>
             </tr>
           </thead>
           <tbody className="divide-y divide-gray-700">
@@ -132,6 +149,15 @@ const ProcessList = () => {
                       ></div>
                     </div>
                   </div>
+                </td>
+                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-300">
+                  <button
+                    onClick={() => killProcess(process.pid)}
+                    className="flex items-center px-3 py-1 bg-red-500 ext-white rounded-lg hover:bg-red-500 transition-colors duration-200"
+                  >
+                    <Trash2 className="w-4 h-4 mr-1" />
+                    Kill
+                  </button>
                 </td>
               </tr>
             ))}
