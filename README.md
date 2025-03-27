@@ -30,8 +30,12 @@ https://github.com/user-attachments/assets/633f9a20-82c4-474f-b0d0-ef98d9721f95
 
 ---
 
+## Architectures- 
+![Screenshot 2025-03-21 214756](https://github.com/user-attachments/assets/6cadf1aa-884b-487f-b4eb-ebd191593c89)
 
+![Screenshot 2025-03-27 092313](https://github.com/user-attachments/assets/f2e8150f-8dd8-4a75-8e65-1d2b26a9d2bc)
 
+![Screenshot 2025-03-27 092404](https://github.com/user-attachments/assets/bdff70c5-505f-4c2c-9d4f-1ecb212f4e43)
 
 ---
 
