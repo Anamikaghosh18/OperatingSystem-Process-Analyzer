@@ -25,28 +25,7 @@ https://github.com/user-attachments/assets/633f9a20-82c4-474f-b0d0-ef98d9721f95
   - Provides actionable recommendations for optimization.
 
 - **Customizable Dashboard**:
-  - Responsive design with animated charts and gauges.
-  - Fixed chatbot for process-related queries.
-
----
-
-## Architectures- 
-![Screenshot 2025-03-21 214756](https://github.com/user-attachments/assets/6cadf1aa-884b-487f-b4eb-ebd191593c89)
-
-![Screenshot 2025-03-27 092313](https://github.com/user-attachments/assets/f2e8150f-8dd8-4a75-8e65-1d2b26a9d2bc)
-
-![Screenshot 2025-03-27 092404](https://github.com/user-attachments/assets/bdff70c5-505f-4c2c-9d4f-1ecb212f4e43)
-
----
-
-## Technologies Used
-
-| **Frontend**                                                                                     | **Backend**                                                                                     |
-|--------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------|
-| ![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB) | ![Node.js](https://img.shields.io/badge/Node.js-43853D?style=for-the-badge&logo=node.js&logoColor=white) |
-| ![Chart.js](https://img.shields.io/badge/Chart.js-FF6384?style=for-the-badge&logo=chartdotjs&logoColor=white) | ![Express.js](https://img.shields.io/badge/Express.js-404D59?style=for-the-badge)              |
-| ![React Circular Progressbar](https://img.shields.io/badge/React%20Circular%20Progressbar-61DAFB?style=for-the-badge&logo=react&logoColor=white) | ![Socket.IO](https://img.shields.io/badge/Socket.IO-010101?style=for-the-badge&logo=socket.io&logoColor=white) |
-| ![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white) | ![Systeminformation](https://img.shields.io/badge/Systeminformation-FF5733?style=for-the-badge&logo=javascript&logoColor=white) |
+  - Responsive design with animated charts and user-attachments/assets/bdff70c5-505f-4c2c-9d4f-1ecb212f4e43)
 
 ---
 
@@ -64,9 +43,6 @@ https://github.com/user-attachments/assets/633f9a20-82c4-474f-b0d0-ef98d9721f95
     ```bash
     npm run dev
 
-4. Open the application in your browser:
-    ```bash
-    http://localhost:5173
 
 ---
 
